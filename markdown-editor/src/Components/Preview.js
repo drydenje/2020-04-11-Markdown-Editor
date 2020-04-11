@@ -1,11 +1,14 @@
 import React from "react";
 import ReactMarkdown from "react-markdown";
+import { useContext } from "react";
+import { MarkdownContext } from "./App";
 
 const Preview = () => {
-  const input = "# This is a markdown header\n\nAnd this is a paragraph";
+  const { markdown } = useContext(MarkdownContext);
   return (
     <div className="preview-pane">
-      <ReactMarkdown source={input} />
+      {/* Takes a string of markdown text and renders to a component */}
+      <ReactMarkdown source={markdown} />
     </div>
   );
 };

@@ -1,30 +1,28 @@
 import React from "react";
-// import logo from "../logo.svg";
 import "../Styles/App.css";
-// import ReactDOM from "react-dom";
+import { useState, createContext } from "react";
+
 import Editor from "./Editor";
 import Preview from "./Preview";
 
+export const MarkdownContext = createContext();
+
 function App() {
+  const [markdown, updateMarkdown] = useState();
+
+  const update = (markdownText) => {
+    console.log("MD:", markdownText);
+
+    updateMarkdown(markdown + markdownText);
+  };
+
   return (
-    <div className="App">
-      {/* <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header> */}
-      <Editor />
-      <Preview />
-    </div>
+    <MarkdownContext.Provider value={{ markdown, update }}>
+      <div className="App">
+        <Editor />
+        <Preview />
+      </div>
+    </MarkdownContext.Provider>
   );
 }
 
